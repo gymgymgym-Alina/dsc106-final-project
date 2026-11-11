@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DSC 106 Final Project</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hook">
+  <h1>Project title goes here</h1>
+  <p class="subtitle">One sentence that states the surprising finding.</p>
+  <figure>
+    <div id="chart-hook" class="chart"></div>
+    <figcaption>Caption: tell the reader what to notice.</figcaption>
+  </figure>
+</header>
+
+<main>
+
+  <section>
+    <h2>The part everyone agrees on</h2>
+    <p>Set up the shared assumption here. Keep text short.</p>
+    <figure>
+      <div id="chart-and" class="chart"></div>
+      <figcaption>Caption.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>But here is the problem</h2>
+    <p>Introduce the tension. This is where the main interaction lives.</p>
+    <figure>
+      <div id="chart-but" class="chart"></div>
+      <div class="controls">
+        <label for="year">Year
+          <input type="range" id="year" min="2020" max="2100" step="1" value="2050">
+          <output id="year-out">2050</output>
+        </label>
+      </div>
+      <figcaption>Caption.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Therefore</h2>
+    <p>Resolve the tension.</p>
+    <figure>
+      <div id="chart-therefore" class="chart"></div>
+      <figcaption>Caption.</figcaption>
+    </figure>
+  </section>
+
+  <section class="takeaway">
+    <h2>Takeaway</h2>
+    <p>The one thing the reader should remember.</p>
+  </section>
+
+  <footer>
+    <p>Team: name, name, name. Data source: link.</p>
+  </footer>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="main.js"></script>
+</body>
+</html>
