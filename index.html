@@ -3,65 +3,81 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DSC 106 Final Project</title>
+<title>One number, thirty answers</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="hook">
-  <h1>Project title goes here</h1>
-  <p class="subtitle">One sentence that states the surprising finding.</p>
-  <figure>
-    <div id="chart-hook" class="chart"></div>
-    <figcaption>Caption: tell the reader what to notice.</figcaption>
-  </figure>
+  <h1>The world warms by one number. Your city warms by another.</h1>
+  <p class="subtitle">Under the high emissions pathway, Cape Town ends the century about 3 degrees warmer. Tehran ends it about 7. Both are in the same global average.</p>
 </header>
 
 <main>
 
   <section>
-    <h2>The part everyone agrees on</h2>
-    <p>Set up the shared assumption here. Keep text short.</p>
     <figure>
-      <div id="chart-and" class="chart"></div>
-      <figcaption>Caption.</figcaption>
+      <div id="chart-rank" class="chart"></div>
+      <figcaption>Warming in 2090 to 2100 against each city's own 1981 to 2010 average, under SSP5-8.5, averaged over four CMIP6 models.</figcaption>
     </figure>
   </section>
 
   <section>
-    <h2>But here is the problem</h2>
-    <p>Introduce the tension. This is where the main interaction lives.</p>
+    <h2>Every model agrees on the direction</h2>
+    <p>There is no real argument about whether these cities get warmer. Averaged across all thirty, both pathways rise, and the gap between them is the choice we make about emissions.</p>
     <figure>
-      <div id="chart-but" class="chart"></div>
+      <div id="chart-paths" class="chart"></div>
+      <div class="legend" id="legend-paths"></div>
+      <figcaption>Mean warming across the thirty cities. History to 2014, then the two pathways.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>But the average is not where anyone lives</h2>
+    <p>Drag the year and the map recolors. Switch the pathway and watch which places pull away from the pack first. Click any city to pin it.</p>
+    <figure>
       <div class="controls">
         <label for="year">Year
-          <input type="range" id="year" min="2020" max="2100" step="1" value="2050">
-          <output id="year-out">2050</output>
+          <input type="range" id="year" min="1950" max="2100" step="1" value="2095">
+          <output id="year-out">2095</output>
         </label>
+        <fieldset>
+          <label><input type="radio" name="scen" value="ssp126"> SSP1-2.6</label>
+          <label><input type="radio" name="scen" value="ssp585" checked> SSP5-8.5</label>
+        </fieldset>
       </div>
-      <figcaption>Caption.</figcaption>
+      <div id="chart-map" class="chart"></div>
+      <div class="legend" id="legend-map"></div>
+      <figcaption>Each circle is one city. Color is warming against its own 1981 to 2010 average.</figcaption>
+    </figure>
+    <figure>
+      <div id="chart-city" class="chart"></div>
+      <figcaption>The pinned city on both pathways, with the global thirty-city mean for comparison.</figcaption>
     </figure>
   </section>
 
   <section>
-    <h2>Therefore</h2>
-    <p>Resolve the tension.</p>
+    <h2>And the models do not agree on how much</h2>
+    <p>The direction is settled. The size is not. For the same city and the same pathway, the four models land in a wide band, and that band is the honest uncertainty.</p>
     <figure>
-      <div id="chart-therefore" class="chart"></div>
-      <figcaption>Caption.</figcaption>
+      <div id="chart-models" class="chart"></div>
+      <div class="legend" id="legend-models"></div>
+      <figcaption>The pinned city under SSP5-8.5, one line per model.</figcaption>
     </figure>
   </section>
 
   <section class="takeaway">
     <h2>Takeaway</h2>
-    <p>The one thing the reader should remember.</p>
+    <p>A global average is a budget, not a forecast for a place. The same 5 degrees of global warming is 3 degrees in one city and 7 in another, and the spread between models is almost as wide as the spread between pathways. If you want to know what warming means for somewhere, you have to ask about somewhere.</p>
   </section>
 
   <footer>
-    <p>Team: name, name, name. Data source: link.</p>
+    <p>Team: TBD. Data: CMIP6 monthly surface air temperature from the Pangeo Google Cloud archive, four models, sampled at the nearest grid point to each city.</p>
   </footer>
 
 </main>
+
+<div class="tip" id="tip"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="main.js"></script>
