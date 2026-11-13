@@ -20,7 +20,9 @@ HEAT = LinearSegmentedColormap.from_list(
 
 plt.rcParams.update({
     "font.family": "sans-serif",
-    "font.sans-serif": ["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"],
+    # Arial first: on macOS matplotlib can load Helvetica Neue regular but not its bold,
+    # which silently drops the bold titles
+    "font.sans-serif": ["Arial", "Helvetica Neue", "Helvetica", "DejaVu Sans"],
     "font.size": 10,
     "axes.edgecolor": MUTED,
     "axes.labelcolor": INK2,
@@ -104,13 +106,18 @@ for scen, color, lab in [("ssp585", SERIES[1], "SSP5-8.5 high emissions"),
                          ("ssp126", SERIES[0], "SSP1-2.6 low emissions")]:
     xs, ys = series(None, scen)
     ax.plot(xs, ys, color=color, lw=2, label=lab)
-    ax.text(xs[-1] + 1.5, ys[-1], f"{ys[-1]:.1f}C", color=color, va="center", fontsize=9.5)
+    # label the 2090 to 2100 average (the number the writeup uses), not the single year 2100
+    dec = glob[(glob.scenario == scen) & glob.year.between(2090, 2100)].w.mean()
+    ax.hlines(dec, 2090, 2100, color=color, lw=5, alpha=0.35)
+    ax.text(2101.5, dec, f"{dec:.1f}C", color=color, va="center", fontsize=9.5)
 ax.axvline(2014, color=MUTED, lw=0.8, ls=":")
 ax.text(2012, ax.get_ylim()[1] * 0.96, "history", ha="right", fontsize=8.5, color=MUTED)
 ax.set_xlim(1950, 2112)
 ax.set_xlabel("Year")
 ax.set_ylabel("Mean warming across 30 cities (C)")
-ax.set_title("Everyone agrees on the direction")
+ax.set_title("Everyone agrees on the direction", pad=22)
+ax.text(0, 1.012, "shaded bars and labels show the 2090 to 2100 average",
+        transform=ax.transAxes, fontsize=8.5, color=MUTED)
 ax.legend(frameon=False, loc="upper left", fontsize=9)
 ax.grid(lw=0.6)
 ax.set_axisbelow(True)
@@ -127,8 +134,8 @@ for f in world["features"]:
         if ring[:, 0].max() - ring[:, 0].min() > 180:
             continue
         ax.fill(ring[:, 0], ring[:, 1], facecolor=GRID, edgecolor="white", lw=0.3, zorder=1)
-cw = cities.assign(w=cities.city.map(
-    mean[(mean.scenario == "ssp585") & (mean.year == 2095)].set_index("city").w))
+# use the same 2090 to 2100 average as figure 1 so the city numbers match across figures
+cw = cities.assign(w=cities.city.map(end))
 sc = ax.scatter(cw.lon, cw.lat, c=cw.w, cmap=HEAT, norm=Normalize(0, VMAX),
                 s=95, zorder=3, edgecolor="white", linewidth=1.4)
 for _, r in cw.iterrows():
@@ -142,32 +149,36 @@ ax.set_xlim(-180, 180)
 ax.set_ylim(-60, 85)
 ax.set_aspect("equal")
 ax.axis("off")
-ax.set_title("Warming in 2095 under SSP5-8.5, by city")
+ax.set_title("Warming in 2090 to 2100 under SSP5-8.5, by city")
 cb = fig.colorbar(sc, ax=ax, shrink=0.6, pad=0.01)
 cb.set_label("Warming (C)", color=INK2, fontsize=9)
 cb.outline.set_visible(False)
 save(fig, "fig3_world_map.png")
 
 # 4 model disagreement
-CITY = "San Diego"
+CITY = "Lima"  # the example used in the team's story (models range 4.1 to 7.2)
 fig, ax = plt.subplots(figsize=(8.5, 4.8))
 models = sorted(d.model.unique())
 ends = []
+dec = d[(d.city == CITY) & (d.scenario == "ssp585") & d.year.between(2090, 2100)]
+dec = dec.groupby("model").warming_c.mean()
 for i, m in enumerate(models):
     xs, ys = series(CITY, "ssp585", m)
     sm = pd.Series(ys).rolling(11, center=True, min_periods=3).mean().values
     ax.plot(xs, ys, color=SERIES[i], lw=0.8, alpha=0.22)
-    ax.plot(xs, sm, color=SERIES[i], lw=2.2, label=m)
+    ax.plot(xs, sm, color=SERIES[i], lw=2.2)
     ends.append(sm[-1])
+# direct labels at the line ends replace the legend
 for i, (m, y) in enumerate(zip(models, spread(ends, 0.42))):
     ax.text(xs[-1] + 3, y, m, color=SERIES[i], va="center", fontsize=9)
-ax.set_xlim(1950, 2150)
+ax.set_xlim(1950, 2100)
 ax.set_xlabel("Year")
 ax.set_ylabel(f"{CITY} warming (C)")
 ax.set_title(f"The models do not agree on how much: {CITY}, SSP5-8.5", pad=26)
-ax.text(0, 1.012, "thin lines are annual values, thick lines are an 11 year mean",
+ax.text(0, 1.012,
+        f"2090 to 2100 average ranges from {dec.min():.1f} to {dec.max():.1f}C across models. "
+        "Thin lines are annual values, thick lines an 11 year mean",
         transform=ax.transAxes, fontsize=8.5, color=MUTED)
-ax.legend(frameon=False, loc="upper left", fontsize=9)
 ax.grid(lw=0.6)
 ax.set_axisbelow(True)
 save(fig, "fig4_model_spread.png")

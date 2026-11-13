@@ -12,11 +12,11 @@ FIGS = os.path.join(HERE, "figures")
 OUT = os.path.join(HERE, "proposal.pdf")
 
 INK, INK2, MUTED = "#0b0b0b", "#52514e", "#898781"
-SANS = ["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"]
+SANS = ["Arial", "Helvetica Neue", "Helvetica", "DejaVu Sans"]  # Arial first so bold headings render
 
 TITLE = "One number, thirty answers"
 SUB = "DSC 106 Final Project Proposal"
-TEAM = "Team members: Abigail Suwargo Alina Gao Fei Liang"
+TEAM = "Team members: Abigail Suwargo, Alina Gao, Fei Liang"
 
 DATASET = (
     "CMIP6 monthly near surface air temperature (variable tas, table Amon) from the "
@@ -33,9 +33,9 @@ WRITEUP = [
     "We want to show what that number hides.",
     "Under the high emissions pathway, the thirty cities in our data warm by 5.5 degrees on average by the end of the century.",
     "Inside that one average, Cape Town warms 3.1 degrees and Tehran warms 7.5. That is a spread of 2.4 times.",
-    "The pattern is not random. Inland and high latitude cities warm fastest, and coastal and tropical cities warm least.",
+    "The pattern is not random. Cities deep inside large continents, like Tehran, Riyadh and Beijing, warm fastest, and many coastal cities, like Singapore, Reykjavik and Cape Town, warm least.",
     "There is a second layer of uncertainty on top of that.",
-    "For a single city on a single pathway, the four models disagree by almost as much as the two pathways differ from each other.",
+    "For a single city on a single pathway, the four models can disagree by almost as much as the two pathways differ. In Lima they range from 4.1 to 7.2 degrees.",
     "Our explorable explanation walks the reader from the global number down to one city, then shows the model spread behind that city's number.",
     "The main interaction is a world map with a year slider and a pathway toggle. Clicking a city pins it and the charts below update to that city.",
     "The takeaway is that a global average is a budget, not a forecast for a place.",
@@ -44,8 +44,8 @@ WRITEUP = [
 SHORT = [
     "End of century warming for all 30 cities under SSP5-8.5, ranked.",
     "Mean warming across the 30 cities on both pathways, 1950 to 2100.",
-    "The same warming shown geographically for a single year.",
-    "One city, one pathway, four models, showing the disagreement.",
+    "The same end of century warming shown on a world map.",
+    "One city (Lima), one pathway, four models, showing the disagreement.",
     "How much warming each city avoids on the low emissions pathway.",
     "Six representative cities on both pathways, on a shared scale.",
 ]
@@ -56,9 +56,9 @@ CAPTIONS = [
     ("fig2_pathways.png",
      "Figure 2. Mean warming across the 30 cities. History to 2014, then the two pathways. This establishes the shared ground before the article complicates it."),
     ("fig3_world_map.png",
-     "Figure 3. The same warming shown geographically for a single year. In the article this becomes the main interactive view, with a year slider and a pathway toggle."),
+     "Figure 3. The same 2090 to 2100 warming as Figure 1, shown on a map. In the article this becomes the main interactive view, with a year slider and a pathway toggle."),
     ("fig4_model_spread.png",
-     "Figure 4. One city, one pathway, four models. The direction is settled and the size is not. This is the second layer of the story."),
+     "Figure 4. One city, one pathway, four models. In Lima the models agree on the direction but range from 4.1 to 7.2 degrees on the size. In the article this chart follows whichever city the reader pins."),
     ("fig5_pathway_choice.png",
      "Figure 5. How much warming each city avoids on the low emissions pathway, sorted by the size of the gap. Riyadh avoids 5.5 degrees and Cape Town avoids 2.3."),
     ("fig6_small_multiples.png",
