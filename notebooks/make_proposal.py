@@ -14,7 +14,7 @@ OUT = os.path.join(HERE, "proposal.pdf")
 INK, INK2, MUTED = "#0b0b0b", "#52514e", "#898781"
 SANS = ["Arial", "Helvetica Neue", "Helvetica", "DejaVu Sans"]  # Arial first so bold headings render
 
-TITLE = "One number, thirty answers"
+TITLE = "How Much Will Your City Warm?"
 SUB = "DSC 106 Final Project Proposal"
 TEAM = "Team members: Abigail Suwargo, Alina Gao, Fei Liang"
 

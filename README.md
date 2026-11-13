@@ -1,4 +1,4 @@
-# One number, thirty answers
+# How Much Will Your City Warm?
 
 DSC 106 final project. An explorable explanation about why a global average
 temperature target says very little about any particular city.

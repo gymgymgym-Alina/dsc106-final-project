@@ -53,6 +53,12 @@ They need pandas and matplotlib.
     the regular Helvetica Neue font but not its bold. Arial is now first in
     the font list, so bold renders. The fallback order is otherwise unchanged.
 
+### Title
+11. Project renamed from "One number, thirty answers" to **"How Much Will Your
+    City Warm?"** in the proposal (`make_proposal.py`), `README.md`, and the
+    browser tab title in `index.html`. The page headline in `index.html` ("The
+    world warms by one number. Your city warms by another.") was left as is.
+
 ## Not changed
 
 - Figures 1, 5 and 6: already correct and consistent.
