@@ -92,7 +92,7 @@ for yi, (c, v) in enumerate(end.items()):
 ax.set_yticks(y, end.index, fontsize=9)
 ax.set_xlim(0, VMAX + 0.8)
 ax.set_xlabel("Warming in 2090 to 2100 vs each city's 1981 to 2010 mean (C)")
-ax.set_title("The same global average hides a 2.4 times spread")
+ax.set_title("Our 30-city average hides a 2.4 times spread")
 ax.tick_params(left=False)
 ax.grid(axis="x", lw=0.6)
 ax.set_axisbelow(True)
