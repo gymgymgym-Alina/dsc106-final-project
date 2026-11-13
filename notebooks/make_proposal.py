@@ -16,7 +16,7 @@ SANS = ["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"]
 
 TITLE = "One number, thirty answers"
 SUB = "DSC 106 Final Project Proposal"
-TEAM = "Team members: "
+TEAM = "Team members: Abigail Suwargo Alina Gao Fei Liang"
 
 DATASET = (
     "CMIP6 monthly near surface air temperature (variable tas, table Amon) from the "
